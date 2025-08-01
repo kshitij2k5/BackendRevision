@@ -1,28 +1,31 @@
-const http = require('http');
-const server = http.createServer((req, res) => {
-  //console.log(req.url,req.method,req.headers);
-  //res.setHeader('content-type','json');
-  res.setHeader('content-type', 'text/html');
-  if (req.url == "/") {
-   return  res.end('<h1>elcome to the Home Page</h1>');
-  }
-  else if (req.url == '/about') {
-    return res.end("<h2>Welcome to the about page</h2>")
-  }
-  else if (req.url == 'contact') {
-return res.end("<h2>welcome to the about page</h2>")
-  }
-  else {
-    res.writeHead(404, { 'content-type': 'text/html' });
-    return res.end('<h1>Page not found</h1>');
-  }
-  
+const http=require('http');
+const fs=require('fs');
+const server=http.createServer((req,res)=>{
+  res.setHeader('content-type','text/html');
   res.write('<html>');
-  res.write('<head><title>My First Page</title></head>');
-  res.write('<body><h1>Hello from my Node.js Server!</h1><h2>Like/share/subscribe</h2></body>');
+  res.write('<head>')
+  res.write('<title>Myntra Page</title>');
+  res.write('<nav>');
+  res.write('<ul>');
+  res.write('<li><a href="/">Home</a></li>');
+  res.write('<li><a href="/about">About</a></li>'); 
+  res.write('<li><a href="/contact">Contact</a></li>');
+  res.write('<li><a href="/products">Products</a></li>');
+  res.write('</ul>');
+  res.write('</nav>');
+  res.write('</head>')
   res.write('</html>');
-});
-const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
+  if(req.url=='/'){
+    res.write('<h1>Welcome to the Home Page</h1>')
+  }else if(req.url=='/about'){
+    res.write('<h1>Welcome to the About Page</h1>')
+  }else if(req.url=='/contact'){
+    res.write('<h1>Welcome to the contact Page</h1>')
+  }else if(req.url=='/products'){
+    res.write('<h1>Welcome to the products Page</h1>')
+  }
+})
+server.listen(3000,()=>{
+  console.log("Server is runnning on PORT 3000");
+  console.log("http://localhost:3000");
+})
